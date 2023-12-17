@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const currentEnv = process.env.LOGGER;
+// const currentEnv = process.env.LOGGER;
 
 // Define los niveles de prioridad
 const logLevels = {
