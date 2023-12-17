@@ -15,11 +15,11 @@ export const config={
         url:process.env.MONGO_URL,       
     },
     
-    github:{
-        clientId:process.env.CLIENT_ID,
-        clientSecret:process.env.CLIENT_SECRET,
-        callbackUrl:process.env.CALLBACK_URL,
-    },
+    // github:{
+    //     clientId:process.env.CLIENT_ID,
+    //     clientSecret:process.env.CLIENT_SECRET,
+    //     callbackUrl:process.env.CALLBACK_URL,
+    // },
     gmail:{
         account: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASS,

@@ -62,36 +62,36 @@ export const initializePassport = () => {
             }
         }
     ));
-    passport.use("githubLoginStrategy", new githubStrategy(
-        {
-            clientID: config.github.clientId,
-            clientSecret: config.github.clientSecret,
-            callbackUrl: config.github.callbackUrl,
-        },
-        async (accesstoken, refreshToken, profile, done) => {
-            try {
-                const user = await UsersService.getByEmail(profile.username);
-                if (!user) {
-                    const newUser = {
-                        first_name: '',
-                        email: profile.username,
-                        password: createHash(profile.id)
-                    };
-                    const userCreated = await UsersService.save(newUser);
-                    const accessToken = generateToken({ email: user.email, role: user.role });
-                    newUser.token = accessToken;
-                    return done(null, userCreated)//En este punto passport completa el proceso de manera
-                } else {
-                    const accessToken = generateToken({ email: user.email, role: user.role });
-                    user.token = accessToken;
-                    return done(null, user);
-                }
-            } catch (error) {
-                return done(error);
-            }
-        }
+    // passport.use("githubLoginStrategy", new githubStrategy(
+    //     {
+    //         clientID: config.github.clientId,
+    //         clientSecret: config.github.clientSecret,
+    //         callbackUrl: config.github.callbackUrl,
+    //     },
+    //     async (accesstoken, refreshToken, profile, done) => {
+    //         try {
+    //             const user = await UsersService.getByEmail(profile.username);
+    //             if (!user) {
+    //                 const newUser = {
+    //                     first_name: '',
+    //                     email: profile.username,
+    //                     password: createHash(profile.id)
+    //                 };
+    //                 const userCreated = await UsersService.save(newUser);
+    //                 const accessToken = generateToken({ email: user.email, role: user.role });
+    //                 newUser.token = accessToken;
+    //                 return done(null, userCreated)//En este punto passport completa el proceso de manera
+    //             } else {
+    //                 const accessToken = generateToken({ email: user.email, role: user.role });
+    //                 user.token = accessToken;
+    //                 return done(null, user);
+    //             }
+    //         } catch (error) {
+    //             return done(error);
+    //         }
+    //     }
 
-    ));
+    // ));
 
     //serializacion y deserializacion
     passport.serializeUser((user, done) => {
